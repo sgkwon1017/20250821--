@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고잔고등학교 급식 정보</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>고잔고등학교 급식 정보</h1>
+        </header>
+        
+        <main>
+            <div class="search-section">
+                <div class="date-controls">
+                    <label for="meal-date">날짜 선택:</label>
+                    <input type="date" id="meal-date" />
+                    <div class="button-group">
+                        <button id="search-btn">일일 조회</button>
+                        <button id="weekly-btn">주간 조회</button>
+                        <button id="monthly-btn">월간 조회</button>
+                    </div>
+                </div>
+                <div class="favorites-section">
+                    <button id="manage-favorites-btn">좋아하는 음식 관리</button>
+                </div>
+            </div>
+            
+            <div class="loading" id="loading" style="display: none;">
+                <p>급식 정보를 불러오는 중...</p>
+            </div>
+            
+            <div class="meal-info" id="meal-info">
+                <div class="meal-card" id="breakfast-card" style="display: none;">
+                    <h3>조식</h3>
+                    <div class="meal-content" id="breakfast-content"></div>
+                </div>
+                
+                <div class="meal-card" id="lunch-card" style="display: none;">
+                    <h3>중식</h3>
+                    <div class="meal-content" id="lunch-content"></div>
+                </div>
+                
+                <div class="meal-card" id="dinner-card" style="display: none;">
+                    <h3>석식</h3>
+                    <div class="meal-content" id="dinner-content"></div>
+                </div>
+            </div>
+            
+            <div class="error-message" id="error-message" style="display: none;">
+                <p>급식 정보를 불러올 수 없습니다. 다른 날짜를 선택해주세요.</p>
+            </div>
+            
+            <div class="nutrition-info" id="nutrition-info" style="display: none;">
+                <div class="nutrition-card">
+                    <h3>오늘의 영양 정보</h3>
+                    <div class="nutrition-content">
+                        <div class="nutrition-item">
+                            <span class="nutrition-label">총 칼로리:</span>
+                            <span class="nutrition-value" id="total-calories">0 kcal</span>
+                        </div>
+                        <div class="nutrition-breakdown">
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">탄수화물:</span>
+                                <span class="nutrition-value" id="total-carbs">0g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">단백질:</span>
+                                <span class="nutrition-value" id="total-protein">0g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">지질:</span>
+                                <span class="nutrition-value" id="total-fat">0g</span>
+                            </div>
+                        </div>
+                        <div class="nutrition-chart">
+                            <div class="chart-bar">
+                                <div class="chart-label">탄수화물</div>
+                                <div class="chart-progress">
+                                    <div class="chart-fill carbs" id="carbs-bar"></div>
+                                </div>
+                                <div class="chart-percentage" id="carbs-percent">0%</div>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="chart-label">단백질</div>
+                                <div class="chart-progress">
+                                    <div class="chart-fill protein" id="protein-bar"></div>
+                                </div>
+                                <div class="chart-percentage" id="protein-percent">0%</div>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="chart-label">지질</div>
+                                <div class="chart-progress">
+                                    <div class="chart-fill fat" id="fat-bar"></div>
+                                </div>
+                                <div class="chart-percentage" id="fat-percent">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- 좋아하는 음식 관리 모달 -->
+        <div id="favorites-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>좋아하는 음식 관리</h3>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="add-favorite">
+                        <input type="text" id="favorite-input" placeholder="좋아하는 음식 추가...">
+                        <button id="add-favorite-btn">추가</button>
+                    </div>
+                    <div class="favorites-list" id="favorites-list">
+                        <!-- 좋아하는 음식 목록이 여기에 표시됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 주간/월간 조회 결과 모달 -->
+        <div id="period-modal" class="modal" style="display: none;">
+            <div class="modal-content period-modal">
+                <div class="modal-header">
+                    <h3 id="period-title">주간 식단</h3>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="period-content">
+                        <!-- 주간/월간 식단이 여기에 표시됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
